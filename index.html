@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Phishing Detector</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f8fb;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #0077cc;
+      margin-bottom: 30px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      resize: vertical;
+    }
+    button {
+      background: #0077cc;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .safe {
+      background: #e0f8e0;
+      color: #2e7d32;
+    }
+    .phishing {
+      background: #ffe6e6;
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h6>DonaldCode2372</h6><img src="image.png">
+    <h1>Email Phishing Detector</h1>
+    <form id="phishingForm">
+      <textarea id="emailText" placeholder="Paste your email content here..."></textarea>
+      <button type="submit">Analyze</button>
+    </form>
+    <div id="result" class="result" style="display: none;"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('phishingForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const emailContent = document.getElementById('emailText').value;
+
+      try {
+        const response = await fetch('http://localhost:5000/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: emailContent })
+        });
+
+        const data = await response.json();
+        resultDiv.style.display = 'block';
+        if (data.prediction === 'Phishing') {
+          resultDiv.textContent = '⚠️ This email is potentially PHISHING!';
+          resultDiv.className = 'result phishing';
+        } else {
+          resultDiv.textContent = '✅ This email is safe.';
+          resultDiv.className = 'result safe';
+        }
+      } catch (error) {
+        resultDiv.style.display = 'block';
+        resultDiv.textContent = 'Error processing request.';
+        resultDiv.className = 'result';
+      }
+    });
+  </script>
+</body>
+</html>
