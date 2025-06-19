@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 📧 Email Phishing Detector
 
 A machine learning project that detects whether an email is a legitimate message or a phishing attempt, using Natural Language Processing (NLP) techniques and logistic regression.
@@ -157,3 +158,6 @@ TU Clausthal – 2025
 ## 📄 License
 
 MIT License – Feel free to use and modify.
+=======
+# phishing-detector
+>>>>>>> afaa16b2bafbd74f4bbae936c91ccf5558a0d693
