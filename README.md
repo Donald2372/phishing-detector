@@ -11,6 +11,10 @@ Phishing is one of the most common forms of cyber attacks. This project uses mac
 - ✅ **Safe Email**  
 - ⚠️ **Phishing Email**
 
+![Screenshot](image2.png)
+![Screenshot](image1.png)
+
+
 The model has been trained on a labeled dataset of real and synthetic emails, and it achieves over 94% accuracy with a balanced tolerance between false positives and false negatives.
 
 ---
@@ -127,7 +131,18 @@ Paste your email content, click **Analyze**, and view the prediction.
 ### Safe Email
 
 ```
-Hello Donald, your Amazon package has been shipped. You can track it here: https://amazon.fr/track...
+Subject: Reminder - Medical Appointment
+
+Hello Donald,
+
+We confirm your appointment with Dr. Nsom on Tuesday, June 25 at 10:30 AM at Clinique du Soleil, Douala.
+
+To cancel or reschedule: 699 123 456
+
+Best regards,
+Clinique du Soleil
+
+...
 ```
 
 ### Phishing Email
